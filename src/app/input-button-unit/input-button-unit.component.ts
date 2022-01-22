@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   <p>
     The title is: {{ title }}
   </p>
-  <input id="my-input" [value]="title">
-  <button>Save</button>
+  <input [value]="title"
+           (keyup.enter)="changeTitle($event.target.value)">
+
+  <button (click)="changeTitle('Button Clicked!')">Save</button>
 `,
   styleUrls: ['./input-button-unit.component.scss']
 })
@@ -20,12 +22,9 @@ constructor() {
 }
 
 ngOnInit(): void {
-  setTimeout(() => {
-    this.title = 'This is not the title you are looking for';
-  }, 3000);
+
 }
-changeTitle(newTitle: string) {
-  console.log(newTitle);
+changeTitle(newTitle: string): void {
   this.title = newTitle;
 }
 }
